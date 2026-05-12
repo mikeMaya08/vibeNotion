@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Vercel
+.vercel
+
+# Editor
+.DS_Store
+*.local
+
+# Logs
+npm-debug.log*
