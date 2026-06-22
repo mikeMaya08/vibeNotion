@@ -1,16 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORT = 5173;
-const baseURL = `http://localhost:${PORT}`;
-
 export default defineConfig({
   testDir: './e2e',
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  reporter: 'html',
+  workers: 1,
+  reporter: [['html'], ['list']],
   use: {
-    baseURL,
+    baseURL: 'https://vibenotion.vercel.app',
     trace: 'on-first-retry',
   },
   projects: [
@@ -19,9 +17,4 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-  webServer: {
-    command: 'npm run dev',
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-  },
 });
